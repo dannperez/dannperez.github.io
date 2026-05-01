@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: #020617;
+      position: sticky;
+      top: 0;
+    }
+
+    header a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 60px;
+      align-items: center;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 40px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #9333ea, #ec4899);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+    }
+
+    .card {
+      min-width: 250px;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      flex-shrink: 0;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: #020617;
+    }
+
+    input, textarea {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>Mi Portafolio</div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#sobre">Sobre mí</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#notas">Notas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <img src="https://via.placeholder.com/500">
+  <div class="hero-text">
+    <h1>Hola, soy Danna 👩‍💻</h1>
+    <p>Exploradora digital, programadora en proceso.</p>
+    <button class="btn">Trabajemos juntos</button>
+  </div>
+</section>
+
+<section id="sobre">
+  <h2>Sobre mí</h2>
+  <p>Aquí puedes escribir sobre ti, tu experiencia, lo que estás aprendiendo, etc.</p>
+</section>
+
+<section id="proyectos">
+  <h2>Mis Proyectos</h2>
+  <div class="carousel">
+    <div class="card">
+      <img src="https://via.placeholder.com/300">
+      <h3>Proyecto 1</h3>
+      <p>Descripción breve</p>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300">
+      <h3>Proyecto 2</h3>
+      <p>Descripción breve</p>
+    </div>
+  </div>
+</section>
+
+<section id="notas">
+  <h2>Mis Notas</h2>
+  <div class="carousel">
+    <div class="card">
+      <h3>Nota 1</h3>
+      <p>Apuntes sobre programación...</p>
+    </div>
+
+    <div class="card">
+      <h3>Nota 2</h3>
+      <p>Resumen de SQL...</p>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <h2>Contacto</h2>
+  <input type="text" placeholder="Tu nombre">
+  <br>
+  <input type="email" placeholder="Tu email">
+  <br>
+  <textarea placeholder="Tu mensaje"></textarea>
+  <br>
+  <button class="btn">Enviar</button>
+</section>
+
+<footer>
+  <p>© 2026 Danna - Portafolio</p>
+</footer>
+
+</body>
+</html>
