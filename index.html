@@ -1,176 +1,1154 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Portafolio</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danna Pérez | Data & Machine Learning Portfolio</title>
+  <meta name="description" content="Portafolio de proyectos, notas de cursos y experiencia en análisis de datos, machine learning y automatización." />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f172a;
-      color: white;
+    :root {
+      --bg: #070912;
+      --bg-soft: #0d1020;
+      --card: rgba(18, 22, 42, 0.76);
+      --card-strong: rgba(24, 29, 55, 0.92);
+      --line: rgba(141, 246, 255, 0.18);
+      --text: #f4f7fb;
+      --muted: #aeb7d0;
+      --muted-2: #7f89a5;
+      --cyan: #35e7ff;
+      --pink: #ff4ecd;
+      --violet: #8b5cf6;
+      --lime: #b6ff5c;
+      --warning: #ffd166;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --max-width: 1140px;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: #020617;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(53, 231, 255, 0.15), transparent 32%),
+        radial-gradient(circle at 80% 8%, rgba(255, 78, 205, 0.12), transparent 30%),
+        radial-gradient(circle at 70% 75%, rgba(139, 92, 246, 0.16), transparent 36%),
+        linear-gradient(135deg, #060713 0%, #0b0d1c 48%, #080a14 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(53, 231, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53, 231, 255, 0.06) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 84%);
+      z-index: -2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 36px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .nav {
       position: sticky;
       top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 9, 18, 0.72);
+      border-bottom: 1px solid var(--line);
     }
 
-    header a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #03040a;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 0 26px rgba(53, 231, 255, 0.25), 0 0 32px rgba(255, 78, 205, 0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .hero {
+      padding: 82px 0 58px;
+      position: relative;
+    }
+
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 60px;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 40px;
       align-items: center;
     }
 
-    .hero img {
-      width: 100%;
-      border-radius: 20px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cyan);
+      border: 1px solid rgba(53, 231, 255, 0.22);
+      background: rgba(53, 231, 255, 0.07);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 22px;
     }
 
-    .hero-text h1 {
-      font-size: 40px;
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--lime);
+      box-shadow: 0 0 18px var(--lime);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.08em;
+      max-width: 760px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--warning));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 32px;
     }
 
     .btn {
-      padding: 12px 20px;
-      background: linear-gradient(45deg, #9333ea, #ec4899);
-      border: none;
-      border-radius: 10px;
-      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 800;
+      transition: 0.2s ease;
       cursor: pointer;
     }
 
+    .btn-primary {
+      color: #050711;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 14px 42px rgba(53, 231, 255, 0.18);
+      border: none;
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .hero-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(18, 22, 42, 0.9), rgba(12, 15, 31, 0.78));
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(53, 231, 255, 0.35), transparent 36%, rgba(255, 78, 205, 0.28));
+      opacity: 0.4;
+      z-index: -1;
+      filter: blur(18px);
+    }
+
+    .panel-top {
+      padding: 18px 18px 0;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px 18px 0 0;
+      background: rgba(3, 5, 14, 0.65);
+      color: var(--muted-2);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--muted-2);
+    }
+
+    .dot:nth-child(1) { background: var(--pink); }
+    .dot:nth-child(2) { background: var(--warning); }
+    .dot:nth-child(3) { background: var(--cyan); }
+
+    .mock-chart {
+      min-height: 300px;
+      padding: 24px;
+      background:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        rgba(3, 5, 14, 0.52);
+      background-size: 34px 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-line {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      top: 42%;
+      height: 112px;
+      border-radius: 50%;
+      border-top: 3px solid var(--cyan);
+      transform: rotate(-4deg);
+      filter: drop-shadow(0 0 10px rgba(53, 231, 255, 0.45));
+    }
+
+    .chart-line.two {
+      top: 56%;
+      border-color: var(--pink);
+      transform: rotate(5deg);
+      opacity: 0.8;
+      filter: drop-shadow(0 0 10px rgba(255, 78, 205, 0.45));
+    }
+
+    .metric-row {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric strong {
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.045);
+      border-radius: var(--radius-lg);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--text);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     section {
-      padding: 40px;
+      padding: 68px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      color: var(--cyan);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
     }
 
     h2 {
-      margin-bottom: 20px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
     }
 
-    .carousel {
+    .section-head p, .about-text p, .note-card p, .experience-card p {
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .glass-card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .about-text {
+      padding: 30px;
+    }
+
+    .about-text p + p {
+      margin-top: 14px;
+    }
+
+    .skill-cloud {
       display: flex;
-      overflow-x: auto;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
     }
 
-    .card {
-      min-width: 250px;
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-      flex-shrink: 0;
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+      font-size: 0.87rem;
     }
 
-    .card img {
-      width: 100%;
-      border-radius: 10px;
+    .chip::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    .focus-card {
+      padding: 30px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .focus-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .focus-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(53, 231, 255, 0.11);
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      color: #050711;
+      background: var(--cyan);
+      border-color: transparent;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      color: #121426;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .project-media {
+      min-height: 210px;
+      background: #070912;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(10, 12, 24, 0.08);
+    }
+
+    .project-media::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(53, 231, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53, 231, 255, 0.08) 1px, transparent 1px);
+      background-size: 26px 26px;
+      opacity: 0.7;
+    }
+
+    .project-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 28% 25%, rgba(53, 231, 255, 0.35), transparent 34%), radial-gradient(circle at 78% 70%, rgba(255, 78, 205, 0.28), transparent 32%);
+    }
+
+    .mini-bars {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 28px;
+      height: 115px;
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .mini-bars i {
+      flex: 1;
+      border-radius: 10px 10px 0 0;
+      background: linear-gradient(180deg, var(--cyan), rgba(53, 231, 255, 0.18));
+      box-shadow: 0 0 18px rgba(53, 231, 255, 0.2);
+    }
+
+    .mini-bars i:nth-child(2n) { background: linear-gradient(180deg, var(--pink), rgba(255, 78, 205, 0.14)); }
+    .mini-bars i:nth-child(1) { height: 92%; }
+    .mini-bars i:nth-child(2) { height: 78%; }
+    .mini-bars i:nth-child(3) { height: 63%; }
+    .mini-bars i:nth-child(4) { height: 86%; }
+    .mini-bars i:nth-child(5) { height: 44%; }
+    .mini-bars i:nth-child(6) { height: 70%; }
+    .mini-bars i:nth-child(7) { height: 35%; }
+    .mini-bars i:nth-child(8) { height: 57%; }
+
+    .project-body {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      flex: 1;
+    }
+
+    .project-body h3 {
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .project-body p {
+      color: #626a80;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      color: #101424;
+      background: #eef1f7;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .project-list {
+      list-style: none;
+      color: #5e6680;
+      font-size: 0.92rem;
+    }
+
+    .project-list li::before {
+      content: "• ";
+      color: var(--pink);
+      font-weight: 900;
+    }
+
+    .project-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .project-btn {
+      min-height: 46px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 900;
+      border: 1px solid #dfe4ef;
+      color: #0e1222;
+      background: #fff;
+      transition: 0.2s ease;
+    }
+
+    .project-btn.demo {
+      color: #fff;
+      background: #070719;
+      border-color: #070719;
+    }
+
+    .project-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(7, 7, 25, 0.15);
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .note-card {
+      padding: 22px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.2s ease;
+    }
+
+    .note-card:hover, .experience-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(53, 231, 255, 0.42);
+    }
+
+    .note-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(53, 231, 255, 0.16), rgba(255, 78, 205, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .note-card h3 {
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .note-link {
+      margin-top: 18px;
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .experience-card {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 22px;
+      transition: 0.2s ease;
+    }
+
+    .date-pill {
+      color: #050711;
+      background: linear-gradient(135deg, var(--cyan), var(--lime));
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      height: fit-content;
+      font-weight: 900;
+    }
+
+    .experience-card h3 {
+      font-size: 1.22rem;
+      margin-bottom: 8px;
+    }
+
+    .cv-panel {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(53, 231, 255, 0.11), rgba(255, 78, 205, 0.09)),
+        var(--card);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
     }
 
     footer {
-      padding: 40px;
-      text-align: center;
-      background: #020617;
+      padding: 40px 0;
+      color: var(--muted-2);
+      border-top: 1px solid var(--line);
     }
 
-    input, textarea {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .notes-grid, .stats, .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .projects-grid, .notes-grid, .stats, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head, .cv-panel, .experience-card {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .experience-card {
+        display: block;
+      }
+
+      .date-pill {
+        margin-bottom: 14px;
+      }
     }
   </style>
 </head>
-
 <body>
-
-<header>
-  <div>Mi Portafolio</div>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#sobre">Sobre mí</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#notas">Notas</a>
-    <a href="#contacto">Contacto</a>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#inicio" aria-label="Ir al inicio">
+        <span class="logo-mark">DP</span>
+        <span>Danna Pérez</span>
+      </a>
+      <div class="nav-links" aria-label="Navegación principal">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#notas">Notas</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#cv">CV</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
   </nav>
-</header>
 
-<section class="hero" id="inicio">
-  <img src="https://via.placeholder.com/500">
-  <div class="hero-text">
-    <h1>Hola, soy Danna 👩‍💻</h1>
-    <p>Exploradora digital, programadora en proceso.</p>
-    <button class="btn">Trabajemos juntos</button>
-  </div>
-</section>
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> Data · Machine Learning · Automation</div>
+        <h1>Construyo soluciones con <span class="gradient-text">datos, ML y automatización.</span></h1>
+        <p>
+          Portafolio personal para documentar proyectos, notas de cursos y avances técnicos. Aquí reúno modelos de machine learning,
+          dashboards, automatizaciones, notebooks y recursos que reflejan mi proceso de aprendizaje.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn-secondary" href="#notas">Explorar notas</a>
+        </div>
+      </div>
 
-<section id="sobre">
-  <h2>Sobre mí</h2>
-  <p>Aquí puedes escribir sobre ti, tu experiencia, lo que estás aprendiendo, etc.</p>
-</section>
-
-<section id="proyectos">
-  <h2>Mis Proyectos</h2>
-  <div class="carousel">
-    <div class="card">
-      <img src="https://via.placeholder.com/300">
-      <h3>Proyecto 1</h3>
-      <p>Descripción breve</p>
+      <div class="hero-panel" aria-label="Panel visual de métricas">
+        <div class="panel-top">
+          <div class="terminal-bar">
+            <span>portfolio.dashboard</span>
+            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          </div>
+        </div>
+        <div class="mock-chart">
+          <div class="metric-row">
+            <div class="metric"><span>Model score</span><strong>94%</strong></div>
+            <div class="metric"><span>Projects</span><strong>08+</strong></div>
+            <div class="metric"><span>Stack</span><strong>ML</strong></div>
+            <div class="metric"><span>Focus</span><strong>MLOps</strong></div>
+          </div>
+          <div class="chart-line"></div>
+          <div class="chart-line two"></div>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/300">
-      <h3>Proyecto 2</h3>
-      <p>Descripción breve</p>
+    <div class="container stats">
+      <div class="stat"><strong>Python</strong><span>scikit-learn, pandas, XGBoost</span></div>
+      <div class="stat"><strong>SQL</strong><span>consultas, modelado, bases relacionales</span></div>
+      <div class="stat"><strong>Power BI</strong><span>dashboards, DAX y storytelling</span></div>
+      <div class="stat"><strong>VBA</strong><span>automatización en Excel</span></div>
     </div>
-  </div>
-</section>
+  </header>
 
-<section id="notas">
-  <h2>Mis Notas</h2>
-  <div class="carousel">
-    <div class="card">
-      <h3>Nota 1</h3>
-      <p>Apuntes sobre programación...</p>
+  <main>
+    <section id="sobre-mi">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Sobre mí</div>
+            <h2>Perfil profesional</h2>
+          </div>
+          <p>Actuaría con enfoque práctico en datos, automatización y machine learning.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="glass-card about-text">
+            <p>
+              Soy recién egresada de Actuaría y estoy construyendo mi camino hacia roles de datos y Machine Learning Engineering.
+              Me interesa convertir problemas reales en soluciones claras: desde limpieza de datos y modelos predictivos hasta
+              dashboards, automatizaciones y documentación técnica.
+            </p>
+            <p>
+              Este sitio funciona como mi bitácora profesional: proyectos terminados, demos, código, notas de cursos y aprendizajes
+              que pueden servir como evidencia de mi crecimiento técnico.
+            </p>
+            <div class="skill-cloud">
+              <span class="chip">Machine Learning</span>
+              <span class="chip">Feature Engineering</span>
+              <span class="chip">Data Visualization</span>
+              <span class="chip">Automation</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">MLOps básico</span>
+            </div>
+          </article>
+
+          <aside class="glass-card focus-card">
+            <div class="focus-item">
+              <div class="focus-icon">01</div>
+              <div><strong>Modelos predictivos</strong><p>Clasificación, regresión, métricas, validación y explicación de modelos.</p></div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-icon">02</div>
+              <div><strong>Productos de datos</strong><p>Dashboards, notebooks, reportes ejecutivos y herramientas reproducibles.</p></div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-icon">03</div>
+              <div><strong>Documentación</strong><p>Notas limpias, guías de cursos y repositorios pensados para ser revisados.</p></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Proyectos</div>
+            <h2>Casos prácticos</h2>
+          </div>
+          <div class="filters" aria-label="Filtros de proyectos">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="ml">ML</button>
+            <button class="filter-btn" data-filter="bi">BI</button>
+            <button class="filter-btn" data-filter="automation">Automatización</button>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card" data-category="ml">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Customer Churn Prediction</h3>
+              <p>Modelo de clasificación para predecir abandono de clientes y detectar variables clave de riesgo.</p>
+              <div class="project-tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">SHAP</span></div>
+              <ul class="project-list"><li>EDA y limpieza</li><li>Validación con métricas</li><li>Interpretabilidad del modelo</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/tu-repositorio" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ml">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Smart Mobility Forecast</h3>
+              <p>Análisis y predicción de condiciones de tráfico usando ocupación vial, clima, accidentes y demanda.</p>
+              <div class="project-tags"><span class="tag">XGBoost</span><span class="tag">Feature Engineering</span><span class="tag">Mobility</span></div>
+              <ul class="project-list"><li>Variables exógenas</li><li>Comparación de modelos</li><li>Insights para movilidad</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/smart-mobility" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="bi">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Power BI Finance Dashboard</h3>
+              <p>Dashboard para seguimiento de indicadores financieros, pagos, vencimientos y variaciones mensuales.</p>
+              <div class="project-tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Storytelling</span></div>
+              <ul class="project-list"><li>KPIs ejecutivos</li><li>Modelo de datos</li><li>Filtros dinámicos</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/dashboard-finance" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="automation">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Excel Report Automation</h3>
+              <p>Automatización en VBA para llenar reportes, validar montos y reducir trabajo manual repetitivo.</p>
+              <div class="project-tags"><span class="tag">VBA</span><span class="tag">Excel</span><span class="tag">Power Query</span></div>
+              <ul class="project-list"><li>Macros reutilizables</li><li>Validaciones automáticas</li><li>Proceso documentado</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/excel-automation" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ml">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Agriculture Yield Model</h3>
+              <p>Modelo supervisado para estimar rendimiento agrícola con variables climáticas y de suelo.</p>
+              <div class="project-tags"><span class="tag">Regression</span><span class="tag">scikit-learn</span><span class="tag">EDA</span></div>
+              <ul class="project-list"><li>Pipeline reproducible</li><li>Métricas de error</li><li>Recomendaciones finales</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/agriculture-model" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ml">
+            <div class="project-media"><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-body">
+              <h3>Recommendation System</h3>
+              <p>Sistema de recomendación con enfoque práctico para sugerir productos, cursos o contenido relevante.</p>
+              <div class="project-tags"><span class="tag">Recommender</span><span class="tag">Python</span><span class="tag">Similarity</span></div>
+              <ul class="project-list"><li>Filtrado colaborativo</li><li>Ranking de resultados</li><li>Demo interactiva</li></ul>
+              <div class="project-actions">
+                <a class="project-btn" href="https://github.com/tu-usuario/recommender-system" target="_blank" rel="noopener">⌘ Code</a>
+                <a class="project-btn demo" href="https://tu-demo.com" target="_blank" rel="noopener">↗ Demo</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="notas">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Notas</div>
+            <h2>Apuntes y rutas de aprendizaje</h2>
+          </div>
+          <p>Sección para subir apuntes de cursos, resúmenes, plantillas y guías propias.</p>
+        </div>
+
+        <div class="notes-grid">
+          <article class="glass-card note-card">
+            <div><div class="note-icon">🐍</div><h3>Python para ML</h3><p>Notas de pandas, numpy, scikit-learn, métricas y pipelines.</p></div>
+            <a class="note-link" href="./notas/python-ml.html">Abrir notas →</a>
+          </article>
+          <article class="glass-card note-card">
+            <div><div class="note-icon">🌲</div><h3>Tree Models & XGBoost</h3><p>Random Forest, Gradient Boosting, validación y tuning.</p></div>
+            <a class="note-link" href="./notas/xgboost.html">Abrir notas →</a>
+          </article>
+          <article class="glass-card note-card">
+            <div><div class="note-icon">📊</div><h3>Power BI + DAX</h3><p>Modelado, medidas, diseño de dashboards y storytelling.</p></div>
+            <a class="note-link" href="./notas/powerbi.html">Abrir notas →</a>
+          </article>
+          <article class="glass-card note-card">
+            <div><div class="note-icon">⚙️</div><h3>VBA & Automatización</h3><p>Macros, buenas prácticas, errores comunes y ejemplos públicos.</p></div>
+            <a class="note-link" href="./notas/vba.html">Abrir notas →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Experiencia</div>
+            <h2>Trayectoria y entregables</h2>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <article class="glass-card experience-card">
+            <span class="date-pill">2026</span>
+            <div>
+              <h3>Automatización de reportes en Excel</h3>
+              <p>
+                Desarrollo de macros y flujos con Power Query para reducir tareas manuales, validar datos y generar reportes
+                con mayor consistencia. Documentación del proceso para que sea fácil de mantener.
+              </p>
+            </div>
+          </article>
+          <article class="glass-card experience-card">
+            <span class="date-pill">2026</span>
+            <div>
+              <h3>Proyecto de base de datos Bicipuma</h3>
+              <p>
+                Diseño de base relacional, normalización, consultas SQL avanzadas, indicadores operativos y presentación técnica
+                de resultados para un sistema de préstamos de bicicletas.
+              </p>
+            </div>
+          </article>
+          <article class="glass-card experience-card">
+            <span class="date-pill">Actual</span>
+            <div>
+              <h3>Ruta Machine Learning Engineer</h3>
+              <p>
+                Formación enfocada en aprendizaje supervisado, feature engineering, modelos basados en árboles, XGBoost,
+                proyectos end-to-end y fundamentos de MLOps.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv">
+      <div class="container">
+        <div class="glass-card cv-panel">
+          <div>
+            <div class="section-kicker">CV</div>
+            <h2>Currículum y perfil</h2>
+            <p>Agrega aquí tu CV en PDF, una versión resumida de tu experiencia y enlaces a LinkedIn o GitHub.</p>
+          </div>
+          <a class="btn btn-primary" href="./assets/CV-Danna-Perez.pdf" target="_blank" rel="noopener">Descargar CV</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Contacto</div>
+            <h2>Conectemos</h2>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:tu-correo@email.com"><strong>Email</strong><p>tu-correo@email.com</p></a>
+          <a class="contact-card" href="https://github.com/tu-usuario" target="_blank" rel="noopener"><strong>GitHub</strong><p>github.com/tu-usuario</p></a>
+          <a class="contact-card" href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener"><strong>LinkedIn</strong><p>linkedin.com/in/tu-usuario</p></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Danna Pérez. Built with HTML, CSS and curiosity.</p>
     </div>
+  </footer>
 
-    <div class="card">
-      <h3>Nota 2</h3>
-      <p>Resumen de SQL...</p>
-    </div>
-  </div>
-</section>
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
 
-<section id="contacto">
-  <h2>Contacto</h2>
-  <input type="text" placeholder="Tu nombre">
-  <br>
-  <input type="email" placeholder="Tu email">
-  <br>
-  <textarea placeholder="Tu mensaje"></textarea>
-  <br>
-  <button class="btn">Enviar</button>
-</section>
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
 
-<footer>
-  <p>© 2026 Danna - Portafolio</p>
-</footer>
+        const filter = button.dataset.filter;
+        projectCards.forEach((card) => {
+          const shouldShow = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !shouldShow);
+        });
+      });
+    });
 
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
